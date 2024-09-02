@@ -20,6 +20,11 @@
                 $base = $_POST['valor_base'];
                 $altura = $_POST['valor_altura'];
                 $area = ($base * $altura)/2;
+                if ($area >= 100){
+                    echo "A área do triângulo é maior que o limite";
+                } else {
+                    echo "A área do triângulo é menor que o limite";
+                }
                 echo "A área de um triângulo de base $base e altura de valor $altura é $area";
             }
         }
