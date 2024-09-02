@@ -16,6 +16,7 @@
     
 
     <a href="update.php"><button>Alterar Login.</button></a>
+    <a href="delete.php"><button>Deletar Login.</button></a>
 
 </body>
 </html>
