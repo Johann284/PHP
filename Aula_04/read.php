@@ -36,6 +36,8 @@ if ($result -> num_rows > 0) {
     echo "Nenhum registro encontrado";
 }
 $conn -> close();
+
+
 ?>
 <br>
 <a href="create.php">Inserir novo registro.</a>
