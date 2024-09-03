@@ -29,13 +29,13 @@ include "bd.php";
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $name = $_POST['name'];
-        $email = $POST['email'];
+        $email = $_POST['email'];
         $updName = $_POST['upd_name'];
         $updEmail = $_POST['upd_email'];
         $sql = "UPDATE user SET user name = $updName, email = $updEmail WHERE name = $name";
 
         if ($conn -> query($sql) === true){
-            echo "Novo resgistro criado com sucesso!";
+            echo "Registro alterado com sucesso!";
         }else{
             echo "Erro" . $sql . "<br>" . $conn -> error;
         }
