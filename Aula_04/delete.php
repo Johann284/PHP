@@ -6,12 +6,10 @@
 </head>
 <body>
     
-<form method="POST" action="update.php">
+<form method="POST" action="delete.php">
     <label for="name">Nome: </label>
         <input type="text" name="name" require>
-    <br>
-    <label for="upd_name">Novo Nome: </label>
-        <input type="text" name="upd_name" require>
+    <input type="submit" value="Deletar">
 </form>
     
 <a href="create.php"><button>Voltar.</button></a>
@@ -19,12 +17,11 @@
 </html>
 
 <?php
-include "bd.php";
+include "db.php";
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $name = $_POST['name'];
-        $email = $POST['email'];
-        $sql = "DELETE * FROM user WHERE name = $name";
+        $sql = "DELETE FROM user WHERE name = '$name'";
 
         if ($conn -> query($sql) === true){
             echo "Resgistro deletado com sucesso!";

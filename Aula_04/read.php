@@ -1,26 +1,41 @@
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPDATE</title>
-</head>
-<body>
-    
-<form method="POST" action="update.php">
-    <label for="name">Nome: </label>
-        <input type="text" name="name" require>
-    <br>
-    <label for="upd_name">Novo Nome: </label>
-        <input type="text" name="upd_name" require>
-</form>
-    
-<a href="create.php"><button>Voltar.</button></a>
-</body>
-</html>
-
 <?php
-include "bd.php";
 
+include 'db.php';
+
+$sql = "SELECT * FROM user";
+
+$result = $conn -> query($sql);
+
+if ($result -> num_rows > 0) {
+    echo "<table border = '1'>
+        <tr>
+            <th>ID: </th>
+            <th>Nome: </th>
+            <th>Email: </th>
+            <th>Data de Criação: </th>
+            <th>Ações: </th>
+        </tr>
+    ";
+    
+    while($row = $result -> fetch_assoc()) {
+
+        echo "  <tr>
+                    <td>{$row['id']}</td>
+                    <td>{$row['name']}</td>
+                    <td>{$row['email']}</td>
+                    <td>{$row['created_at']}</td>
+                    <td>
+                    <a href='update.php?id={$row['id']}'>Editar</a>
+                    <a href='delete.php'>Excluir</a>
+                    </td>
+                </tr>
+        ";
+    }
+    echo "</table>";
+} else {
+    echo "Nenhum registro encontrado";
+}
 $conn -> close();
-
 ?>
+<br>
+<a href="create.php">Inserir novo registro.</a>

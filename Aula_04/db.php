@@ -3,7 +3,7 @@
 $servername = "localhost"; // nome do servidor
 $username = "root"; // nome do usuário
 $password = "root"; // senha do usuário
-$dbname = "crud_system"; // nome do banco de dados
+$dbname = "crud_JGR"; // nome do banco de dados
 
 // conectando com o banco de dados
 $conn = new mysqli($servername, $username, $password, $dbname); // variável de conexão 
@@ -12,9 +12,5 @@ $conn = new mysqli($servername, $username, $password, $dbname); // variável de 
 if ($conn -> connect_error){ // Se a conexão der falha, mostrará erro com o tipo do erro.W
     die("Conexão Falhou: " . $conn -> connect_error);
 };
-
-$conn -> close();
-
-
 
 ?>
