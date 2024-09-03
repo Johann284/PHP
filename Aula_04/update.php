@@ -5,7 +5,6 @@
     <title>UPDATE</title>
 </head>
 <body>
-    
 <form method="POST" action="update.php">
     <label for="name">Nome: </label>
         <input type="text" name="name" require>
