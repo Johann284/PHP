@@ -12,7 +12,6 @@
 
 
 if (isset($_POST["create"])){
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nome_cliente = $_POST['nome_cliente'];
     $nome_produto = $_POST['nome_produto'];
     $quantidade = $_POST['quantidade'];
@@ -27,7 +26,7 @@ if (isset($_POST["create"])){
             echo "Erro" . $sql . "<br>" . $conn -> error;
         }
     }
-    }
+    
 }
 
 if (isset($_POST["delete"])){
