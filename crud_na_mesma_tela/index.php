@@ -93,8 +93,78 @@ if (isset($_POST["update"])){
                 echo "Erro" . $sql . "<br>" . $conn -> error;
             }
         }
-    }
-}
+    header ("Location: index.php");
+    };
+};
+
+if (isset($_POST["mostrar_alterar"])){
+    echo "
+            <h3>Alterar (Update)</h3>
+
+            <form method='POST' action='' >
+                    
+            <label for='id'>ID do pedido </label>
+            <input type='text' name='id' require>
+
+            <br>
+
+            
+            <label for='upd_nome_cliente'>Novo nome do cliente: </label>
+            <input type='text' name='upd_nome_cliente' require>
+
+            <br>
+
+            <label for='upd_nome_produto'>Novo nome do produto: </label>
+            <input type='text' name='upd_nome_produto' require>
+
+            <br>
+
+            <label for='upd_quantidade'>Nova quantidade (máximo de 10 algarismos): </label>
+            <input type='number' name='upd_quantidade' require>
+
+            <br>
+
+
+            <label for='upd_data_pedido'>Nova data do produto: </label>
+            <input type='date' name='upd_data_pedido' require>
+
+            <br>
+            <input type='submit' name='update' value='Alterar'>
+            </form>
+        ";
+};
+
+if (isset($_POST["mostrar_deletar"])){
+    echo "
+        <h3>Deletar (Delete)</h3>
+            <form method='POST' action=''>
+                <label for='id_del'>ID do pedido: </label>
+                <input type='text' name='id_del' require>
+                <input type='submit' name='delete' value='Deletar'>
+            </form>
+        ";
+};
+
+if (isset($_POST["mostrar_criar"])){
+    echo "
+        <h3>Criar (Create)</h3>
+        <form method='POST' action=''>
+            <label for='nome_cliente'>Nome do cliente: </label>
+            <input type='text' name='nome_cliente' require>
+            <br>
+            <label for='nome_produto'>Nome do produto: </label>
+            <input type='text' name='nome_produto' require>
+            <br>
+            <label for='quantidade'>Quantidade (máximo de 10 algarismos): </label>
+            <input type='number' name='quantidade' require>
+            <br>
+            <label for='data_pedido'>Data do Pedido: </label>
+            <input type='date' name='data_pedido' require>
+            <br>
+            <input type='submit' name='create' value='Adicionar'>
+        </form>
+        ";
+};
 ?>
 <html lang="pt-BR">
 <head>
@@ -103,60 +173,18 @@ if (isset($_POST["update"])){
     <title>Tudo na mesma tela</title>
 </head>
 <body>
-    <h3>Criando (Create)</h3>
+<section>
     <form method="POST" action="">
-            <label for="nome_cliente">Nome do cliente: </label>
-            <input type="text" name="nome_cliente" require>
-            <br>
-            <label for="nome_produto">Nome do produto: </label>
-            <input type="text" name="nome_produto" require>
-            <br>
-            <label for="quantidade">Quantidade (máximo de 10 algarismos): </label>
-            <input type="number" name="quantidade" require>
-            <br>
-            <label for="data_pedido">Data do Pedido: </label>
-            <input type="date" name="data_pedido" require>
-            <br>
-            <input type="submit" name="create" value="Adicionar">
-        </form>
-
-    <h3>Deletar (Delete)</h3>
-    <form method="POST" action="">
-        <label for="id_del">ID do pedido: </label>
-        <input type="text" name="id_del" require>
-        <input type="submit" name="delete" value="Deletar">
+        <button type="submit"name="mostrar_criar">Criar valores</button>
     </form>
 
-    <h3>Alterar (Update)</h3>
-    
-     <form method="POST" action="" >
-            
-        <label for="id">ID do pedido </label>
-        <input type="text" name="id" require>
+    <form method="POST" action="">
+        <button type="submit"name="mostrar_deletar">Deletar valores</button>
+    </form>
 
-        <br>
-
-        <label for="upd_nome_cliente">Novo nome do cliente: </label>
-        <input type="text" name="upd_nome_cliente" require>
-
-        <br>
-
-        <label for="upd_nome_produto">Novo nome do produto: </label>
-        <input type="text" name="upd_nome_produto" require>
-
-        <br>
-
-        <label for="upd_quantidade">Nova quantidade (máximo de 10 algarismos): </label>
-        <input type="number" name="upd_quantidade" require>
-
-        <br>
-
-
-        <label for="upd_data_pedido">Nova data do produto: </label>
-        <input type="date" name="upd_data_pedido" require>
-
-        <br>
-        <input type="submit" name="update" value="Alterar">
-    </form> 
+    <form method="POST" action="">
+        <button type="submit" name="mostrar_alterar">Alterar valores</button>
+    </form>
+</section>
 </body>
 </html>
