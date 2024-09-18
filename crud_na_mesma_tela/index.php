@@ -41,35 +41,62 @@ if (isset($_POST["delete"])){
     }
     }
 };
-if (isset($_POST["read"])){
+if (isset($_POST["update"])){
     $sql = "SELECT * FROM pedidos";
     $result = $conn -> query($sql);
     if ($result -> num_rows > 0) {
-    echo "<table border = '1'>
-        <tr>
-            <th>ID: </th>
-            <th>Nome: </th>
-            <th>nome_produto: </th>
-            <th>quantidade: </th>
-            <th>data_pedido: </th>
-            <th>Ações: </th>
-        </tr>
-    ";
-    while($row = $result -> fetch_assoc()) {
-        echo "  <tr>
-                    <td>{$row['id']}</td>
-                    <td>{$row['nome_cliente']}</td>
-                    <td>{$row['nome_produto']}</td>
-                    <td>{$row['quantidade']}</td>
-                    <td>{$row['data_pedido']}</td>
-                </tr>
+        echo "<table border = '1'>
+            <tr>
+                <th>ID: </th>
+                <th>Nome: </th>
+                <th>nome_produto: </th>
+                <th>quantidade: </th>
+                <th>data_pedido: </th>
+                <th>Ações: </th>
+            </tr>
         ";
-    }
-    echo "</table>";
+        while($row = $result -> fetch_assoc()) {
+            echo "  <tr>
+                        <td>{$row['id']}</td>
+                        <td>{$row['nome_cliente']}</td>
+                        <td>{$row['nome_produto']}</td>
+                        <td>{$row['quantidade']}</td>
+                        <td>{$row['data_pedido']}</td>
+                        <td>
+                            <button type='submit'>Alterar</button>
+                            <button type='submit'>Deletar</button>
+                        </td>
+                    </tr>
+            ";
+        }
+        echo "</table>";
     } else {
-    echo "Nenhum registro encontrado";
+        echo "Nenhum registro encontrado";
     }
 };
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $id = $_POST['id'];
+    $nome_cliente = $_POST['nome_cliente'];
+    $nome_produto = $_POST['nome_produto'];
+    $quantidade = $_POST['quantidade'];
+    $data_pedido = $_POST['data_pedido'];
+
+    if($_POST['id'] == 0){
+        $sql = "INSERT INTO pedidos(nome_cliente, nome_produto, quantidade, data_pedido) VALUE ('$nome_cliente', '$nome_produto', '$quantidade', '$data_pedido')";
+    }
+    else{
+        $id = $_POST['id'];
+        $sql = "UPDATE pedidos SET nome_cliente='$nome_cliente', nome_produto='$nome_produto', quantidade='$quantidade', data_pedido='$data_pedido' WHERE id=$id";
+    }
+
+    if ($conn -> query($sql) === TRUE) {
+        echo "Registro atualizado com sucesso";
+    } else {
+        echo "Erro: " . $sql . "<br>" . $conn->error;
+    }
+}
 
 if (isset($_POST["update"])){
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -119,13 +146,13 @@ if (isset($_POST["update"])){
         <input type="submit" name="delete" value="Deletar">
     </form>
 
-    <h3>Lendo (Read)</h3>
-    <form method="POST" action="">
-        <input type="submit" name="read">
-    </form>
-
     <h3>Alterar (Update)</h3>
     <form method="POST" action="">
+        <label for="nome_cliente">Nome do cliente: </label>
+        <input type="text" name="nome_cliente" require>
+        <input type="submit" value="Alterar">
+    </form>
+    <!-- <form method="POST" action="" >
         <div>
         <label for="nome_cliente">Nome do cliente: </label>
         <input type="text" name="nome_cliente" require>
@@ -161,6 +188,6 @@ if (isset($_POST["update"])){
 
         <br>
         <input type="submit" name="update" value="Alterar">
-    </form>
+    </form> -->
 </body>
 </html>
