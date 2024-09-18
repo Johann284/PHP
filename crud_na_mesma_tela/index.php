@@ -30,18 +30,24 @@ if (isset($_POST["create"])){
 }
 
 if (isset($_POST["delete"])){
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nome_cliente = $_POST['nome_cliente'];
-    $sql = "DELETE FROM pedidos WHERE nome_cliente = '$nome_cliente'";
-
-    if ($conn -> query($sql) === true){
-        echo "Resgistro deletado com sucesso!";
+    $id_del = $_POST['id_del'];
+    if ($id_del == null){
+        echo 'Valor de alteração inválido';
     }else{
-        echo "Erro" . $sql . "<br>" . $conn -> error;
-    }
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id_del = $_POST['id_del'];
+            $sql = "DELETE FROM pedidos WHERE id = '$id_del'";
+
+            if ($conn -> query($sql) === true){
+                echo "Resgistro deletado com sucesso!";
+            }else{
+                echo "Erro" . $sql . "<br>" . $conn -> error;
+            }
+        }
     }
 };
-if (isset($_POST["update"])){
+
+
     $sql = "SELECT * FROM pedidos";
     $result = $conn -> query($sql);
     if ($result -> num_rows > 0) {
@@ -52,7 +58,6 @@ if (isset($_POST["update"])){
                 <th>nome_produto: </th>
                 <th>quantidade: </th>
                 <th>data_pedido: </th>
-                <th>Ações: </th>
             </tr>
         ";
         while($row = $result -> fetch_assoc()) {
@@ -62,10 +67,6 @@ if (isset($_POST["update"])){
                         <td>{$row['nome_produto']}</td>
                         <td>{$row['quantidade']}</td>
                         <td>{$row['data_pedido']}</td>
-                        <td>
-                            <button type='submit'>Alterar</button>
-                            <button type='submit'>Deletar</button>
-                        </td>
                     </tr>
             ";
         }
@@ -73,45 +74,25 @@ if (isset($_POST["update"])){
     } else {
         echo "Nenhum registro encontrado";
     }
-};
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $id = $_POST['id'];
-    $nome_cliente = $_POST['nome_cliente'];
-    $nome_produto = $_POST['nome_produto'];
-    $quantidade = $_POST['quantidade'];
-    $data_pedido = $_POST['data_pedido'];
-
-    if($_POST['id'] == 0){
-        $sql = "INSERT INTO pedidos(nome_cliente, nome_produto, quantidade, data_pedido) VALUE ('$nome_cliente', '$nome_produto', '$quantidade', '$data_pedido')";
-    }
-    else{
-        $id = $_POST['id'];
-        $sql = "UPDATE pedidos SET nome_cliente='$nome_cliente', nome_produto='$nome_produto', quantidade='$quantidade', data_pedido='$data_pedido' WHERE id=$id";
-    }
-
-    if ($conn -> query($sql) === TRUE) {
-        echo "Registro atualizado com sucesso";
-    } else {
-        echo "Erro: " . $sql . "<br>" . $conn->error;
-    }
-}
 
 if (isset($_POST["update"])){
+    $id = $_POST['id'];
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nome_cliente = $_POST['nome_cliente'];
-    $updnome_cliente = $_POST['upd_nome_cliente'];
-    $updnome_produto = $_POST['upd_nome_produto'];
-    $updquantidade = $_POST['upd_quantidade'];
-    $upddata_pedido = $_POST['upd_data_pedido'];
-    $sql = "UPDATE pedidos SET nome_cliente = '$updnome_cliente', nome_produto = '$updnome_produto', quantidade = '$updquantidade', data_pedido = '$upddata_pedido' WHERE nome_cliente = '$nome_cliente'";
+        if ($id == null){
+            echo 'Valor de alteração inválido';
+        }else{
+            $updnome_cliente = $_POST['upd_nome_cliente'];
+            $updnome_produto = $_POST['upd_nome_produto'];
+            $updquantidade = $_POST['upd_quantidade'];
+            $upddata_pedido = $_POST['upd_data_pedido'];
+            $sql = "UPDATE pedidos SET nome_cliente = '$updnome_cliente', nome_produto = '$updnome_produto', quantidade = '$updquantidade', data_pedido = '$upddata_pedido' WHERE id = '$id'";
 
-    if ($conn -> query($sql) === true){
-        echo "Registro alterado com sucesso!";
-    }else{
-        echo "Erro" . $sql . "<br>" . $conn -> error;
-    }
+            if ($conn -> query($sql) === true){
+                echo "Registro alterado com sucesso!";
+            }else{
+                echo "Erro" . $sql . "<br>" . $conn -> error;
+            }
+        }
     }
 }
 ?>
@@ -141,53 +122,41 @@ if (isset($_POST["update"])){
 
     <h3>Deletar (Delete)</h3>
     <form method="POST" action="">
-        <label for="nome_cliente">Nome do cliente: </label>
-        <input type="text" name="nome_cliente" require>
+        <label for="id_del">ID do pedido: </label>
+        <input type="text" name="id_del" require>
         <input type="submit" name="delete" value="Deletar">
     </form>
 
     <h3>Alterar (Update)</h3>
-    <form method="POST" action="">
-        <label for="nome_cliente">Nome do cliente: </label>
-        <input type="text" name="nome_cliente" require>
-        <input type="submit" value="Alterar">
-    </form>
-    <!-- <form method="POST" action="" >
-        <div>
-        <label for="nome_cliente">Nome do cliente: </label>
-        <input type="text" name="nome_cliente" require>
+    
+     <form method="POST" action="" >
+            
+        <label for="id">ID do pedido </label>
+        <input type="text" name="id" require>
 
-        <label for="upd_nome_cliente">Novo Nome do cliente: </label>
-        <input type="text" name="upd_nome_cliente" require>
-        </div>
         <br>
-        <div>
-        <label for="nome_produto">Nome do produto: </label>
-        <input type="text" name="nome_produto" require>
 
-        
+        <label for="upd_nome_cliente">Novo nome do cliente: </label>
+        <input type="text" name="upd_nome_cliente" require>
+
+        <br>
+
         <label for="upd_nome_produto">Novo nome do produto: </label>
         <input type="text" name="upd_nome_produto" require>
-        </div>
-        <br>
-        <div>
-        <label for="quantidade">Quantidade: </label>
-        <input type="number" name="quantidade" require>
 
-        <label for="upd_quantidade">Nova Quantidade: </label>
-        <input type="number" name="upd_quantidade" require>
-        </div>
         <br>
-        <div>
-        <label for="data_pedido">Data do pedido: </label>
-        <input type="date" name="data_pedido" require>
+
+        <label for="upd_quantidade">Nova quantidade: </label>
+        <input type="number" name="upd_quantidade" require>
+
+        <br>
+
 
         <label for="upd_data_pedido">Nova data do produto: </label>
         <input type="date" name="upd_data_pedido" require>
-        </div>
 
         <br>
         <input type="submit" name="update" value="Alterar">
-    </form> -->
+    </form> 
 </body>
 </html>
