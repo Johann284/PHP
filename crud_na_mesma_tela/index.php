@@ -127,19 +127,39 @@ if (isset($_POST["update"])){
 
     <h3>Alterar (Update)</h3>
     <form method="POST" action="">
+        <div>
         <label for="nome_cliente">Nome do cliente: </label>
         <input type="text" name="nome_cliente" require>
-        <label for="upd_nome_cliente">Novo Nome: </label>
+
+        <label for="upd_nome_cliente">Novo Nome do cliente: </label>
         <input type="text" name="upd_nome_cliente" require>
-        <label for="quantidade">Nome do cliente: </label>
-        <input type="text" name="quantidade" require>
+        </div>
         <br>
-        <label for="upd_quantidade">Novo Nome: </label>
-        <input type="text" name="upd_quantidade" require>
-        <label for="data_pedido">Nome_produto: </label>
-        <input type="text" name="data_pedido" require>
-        <label for="upd_data_pedudo">Novo nome_produto: </label>
-        <input type="text" name="upd_data_pedudo" require>
+        <div>
+        <label for="nome_produto">Nome do produto: </label>
+        <input type="text" name="nome_produto" require>
+
+        
+        <label for="upd_nome_produto">Novo nome do produto: </label>
+        <input type="text" name="upd_nome_produto" require>
+        </div>
+        <br>
+        <div>
+        <label for="quantidade">Quantidade: </label>
+        <input type="number" name="quantidade" require>
+
+        <label for="upd_quantidade">Nova Quantidade: </label>
+        <input type="number" name="upd_quantidade" require>
+        </div>
+        <br>
+        <div>
+        <label for="data_pedido">Data do pedido: </label>
+        <input type="date" name="data_pedido" require>
+
+        <label for="upd_data_pedido">Nova data do produto: </label>
+        <input type="date" name="upd_data_pedido" require>
+        </div>
+
         <br>
         <input type="submit" name="update" value="Alterar">
     </form>
