@@ -32,7 +32,7 @@ if (isset($_POST["create"])){
 if (isset($_POST["delete"])){
     $id_del = $_POST['id_del'];
     if ($id_del == null){
-        echo 'Valor de alteração inválido';
+        echo 'Valor para deletar inválido';
     }else{
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_del = $_POST['id_del'];
@@ -111,7 +111,7 @@ if (isset($_POST["update"])){
             <label for="nome_produto">Nome do produto: </label>
             <input type="text" name="nome_produto" require>
             <br>
-            <label for="quantidade">Quantidade: </label>
+            <label for="quantidade">Quantidade (máximo de 10 algarismos): </label>
             <input type="number" name="quantidade" require>
             <br>
             <label for="data_pedido">Data do Pedido: </label>
@@ -146,7 +146,7 @@ if (isset($_POST["update"])){
 
         <br>
 
-        <label for="upd_quantidade">Nova quantidade: </label>
+        <label for="upd_quantidade">Nova quantidade (máximo de 10 algarismos): </label>
         <input type="number" name="upd_quantidade" require>
 
         <br>
